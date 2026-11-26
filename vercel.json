@@ -1,0 +1,28 @@
+{
+  "rewrites": [
+    {
+      "source": "/latest.json",
+      "destination": "/api/latest"
+    },
+    {
+      "source": "/stream.json",
+      "destination": "/api/stream"
+    },
+    {
+      "source": "/Chatelle-setup.exe",
+      "destination": "/api/download?os=windows"
+    },
+    {
+      "source": "/Chatelle.dmg",
+      "destination": "/api/download?os=macos"
+    },
+    {
+      "source": "/stats",
+      "destination": "/stats.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    }
+  ]
+}

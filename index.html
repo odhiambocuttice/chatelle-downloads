@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatelle — Download for macOS &amp; Windows</title>
+    <link rel="icon" type="image/png" href="./icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #f6f3ee;
+        --paper-strong: #ece7df;
+        --ink: #191615;
+        --ink-2: #57504c;
+        --ink-3: #877f79;
+        --rule: #ddd6cc;
+        --terracotta: #c96442;
+        --terracotta-hover: #b55434;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --paper: #23211f;
+          --paper-strong: #2c2927;
+          --ink: #f4f0ea;
+          --ink-2: #b8b0a8;
+          --ink-3: #857d76;
+          --rule: #3a3633;
+          --terracotta: #d97757;
+          --terracotta-hover: #e28668;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          "Plus Jakarta Sans",
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        background-color: var(--paper);
+        color: var(--ink);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: clamp(28px, 5vw, 64px);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .topbar {
+        max-width: 920px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--rule);
+      }
+
+      .identity {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .identity img {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+      }
+
+      .brand-name {
+        font-weight: 700;
+        font-size: 17px;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+      }
+
+      .top-version {
+        font-size: 13px;
+        color: var(--ink-2);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .workspace {
+        max-width: 920px;
+        width: 100%;
+        margin: clamp(48px, 9vh, 108px) auto;
+        display: grid;
+        grid-template-columns: 1.35fr 0.9fr;
+        gap: clamp(36px, 6vw, 88px);
+        align-items: start;
+      }
+
+      @media (max-width: 720px) {
+        .workspace {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .headline {
+        font-family: "Instrument Serif", Georgia, serif;
+        font-weight: 400;
+        font-size: clamp(44px, 6vw, 68px);
+        line-height: 1.03;
+        letter-spacing: -0.02em;
+        margin-bottom: 20px;
+      }
+
+      .lede {
+        font-size: 17px;
+        line-height: 1.6;
+        color: var(--ink-2);
+        max-width: 46ch;
+        margin-bottom: 32px;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .download-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background-color: var(--terracotta);
+        color: #fffaf6;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 15px;
+        letter-spacing: -0.01em;
+        padding: 14px 24px;
+        border-radius: 8px;
+        transition:
+          background-color 0.14s ease,
+          transform 0.1s ease;
+      }
+
+      .download-button:hover {
+        background-color: var(--terracotta-hover);
+      }
+
+      .download-button:active {
+        transform: translateY(1px);
+      }
+
+      .download-button svg {
+        width: 17px;
+        height: 17px;
+        stroke-width: 2.2;
+      }
+
+      .os-note {
+        font-size: 13px;
+        color: var(--ink-3);
+      }
+
+      .platform-switcher {
+        margin-top: 18px;
+        font-size: 13px;
+        color: var(--ink-2);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .platform-link {
+        background: none;
+        border: none;
+        padding: 0;
+        font: inherit;
+        color: var(--ink);
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        cursor: pointer;
+      }
+
+      .platform-link:hover {
+        color: var(--terracotta);
+      }
+
+      .spec-sheet {
+        border-top: 2px solid var(--ink);
+        padding-top: 18px;
+      }
+
+      .spec-header-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+
+      .spec-heading {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+      }
+
+      .os-tabs {
+        display: inline-flex;
+        gap: 4px;
+        background: var(--paper-strong);
+        padding: 3px;
+        border-radius: 6px;
+      }
+
+      .os-tab {
+        border: none;
+        background: transparent;
+        color: var(--ink-2);
+        font-family: inherit;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .os-tab[aria-selected="true"] {
+        background: var(--paper);
+        color: var(--ink);
+      }
+
+      .spec-list {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 14px;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .spec-list tr {
+        border-bottom: 1px solid var(--rule);
+      }
+
+      .spec-list th {
+        text-align: left;
+        font-weight: 500;
+        color: var(--ink-2);
+        padding: 11px 12px 11px 0;
+        width: 42%;
+      }
+
+      .spec-list td {
+        text-align: right;
+        font-weight: 600;
+        color: var(--ink);
+        padding: 11px 0;
+      }
+
+      .macos-guide {
+        margin-top: 20px;
+        padding-top: 16px;
+        border-top: 1px solid var(--rule);
+        font-size: 13px;
+        line-height: 1.55;
+        color: var(--ink-2);
+      }
+
+      .macos-guide strong {
+        color: var(--ink);
+      }
+
+      .cmd-bar {
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        background: var(--paper-strong);
+        border: 1px solid var(--rule);
+        border-radius: 6px;
+        padding: 7px 10px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 12px;
+        color: var(--ink);
+      }
+
+      .copy-cmd-btn {
+        border: 1px solid var(--rule);
+        background: var(--paper);
+        color: var(--ink);
+        font-family: inherit;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .footer {
+        max-width: 920px;
+        width: 100%;
+        margin: 0 auto;
+        padding-top: 20px;
+        border-top: 1px solid var(--rule);
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        color: var(--ink-3);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="identity">
+        <img src="./icon.png" alt="Chatelle" />
+        <span class="brand-name">Chatelle</span>
+      </div>
+      <span class="top-version" id="top-version">Desktop Release</span>
+    </header>
+
+    <main class="workspace">
+      <section>
+        <h1 class="headline">Speak or draft, typed directly at your cursor.</h1>
+        <p class="lede" id="lede-text">
+          A lightweight desktop app for macOS and Windows. Press your shortcut,
+          talk or draft, and Chatelle types into the active window one keystroke
+          at a time.
+        </p>
+
+        <div class="cta-row">
+          <a
+            id="download-link"
+            class="download-button"
+            href="./Chatelle.dmg"
+            download
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 4v12" />
+              <path d="m7 11 5 5 5-5" />
+              <path d="M5 20h14" />
+            </svg>
+            <span id="button-label">Download Chatelle</span>
+          </a>
+          <span class="os-note" id="os-note">macOS (Apple Silicon)</span>
+        </div>
+
+        <div class="platform-switcher">
+          <span id="other-os-prompt">Looking for Windows instead?</span>
+          <button type="button" class="platform-link" id="switch-os-btn">
+            Switch to Windows (.exe)
+          </button>
+        </div>
+      </section>
+
+      <aside class="spec-sheet" aria-label="Release details">
+        <div class="spec-header-row">
+          <div class="spec-heading">Current Release</div>
+          <div class="os-tabs" role="tablist" aria-label="Operating system">
+            <button
+              type="button"
+              role="tab"
+              id="tab-macos"
+              class="os-tab"
+              aria-selected="true"
+            >
+              macOS
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="tab-windows"
+              class="os-tab"
+              aria-selected="false"
+            >
+              Windows
+            </button>
+          </div>
+        </div>
+        <table class="spec-list">
+          <tbody>
+            <tr>
+              <th>Version</th>
+              <td id="meta-version">—</td>
+            </tr>
+            <tr>
+              <th>Released</th>
+              <td id="meta-date">—</td>
+            </tr>
+            <tr>
+              <th>Installer</th>
+              <td id="meta-installer">Chatelle.dmg</td>
+            </tr>
+            <tr>
+              <th>System</th>
+              <td id="meta-arch">macOS 12+ (Apple Silicon)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="macos-guide" id="macos-guide">
+          <strong>First launch on macOS:</strong> Drag Chatelle to
+          <strong>Applications</strong>. If macOS says
+          <em>&ldquo;Chatelle Not Opened&rdquo;</em>, click
+          <strong>Done</strong>, open
+          <strong>System Settings &rarr; Privacy &amp; Security</strong>, scroll
+          down, and click <strong>Open Anyway</strong> — or run in Terminal:
+          <div class="cmd-bar">
+            <code>xattr -cr /Applications/Chatelle.app</code>
+            <button
+              type="button"
+              class="copy-cmd-btn"
+              onclick="navigator.clipboard.writeText('xattr -cr /Applications/Chatelle.app && open -a Chatelle')"
+            >
+              Copy
+            </button>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <span>Chatelle Desktop</span>
+      <span id="footer-build">Automatic updates enabled</span>
+    </footer>
+
+    <script>
+      const PLATFORMS = {
+        macos: {
+          label: "macOS",
+          ext: ".dmg",
+          file: "Chatelle.dmg",
+          defaultUrl: "./Chatelle.dmg",
+          osNote: "macOS 12+ (Apple Silicon)",
+          arch: "Apple Silicon (arm64)",
+          otherPrompt: "On a Windows PC?",
+          otherAction: "Switch to Windows (.exe)",
+          otherKey: "windows",
+        },
+        windows: {
+          label: "Windows",
+          ext: ".exe",
+          file: "Chatelle-setup.exe",
+          defaultUrl: "./Chatelle-setup.exe",
+          osNote: "Windows 10 & 11 (64-bit)",
+          arch: "x86_64 (64-bit)",
+          otherPrompt: "On a Mac?",
+          otherAction: "Switch to macOS (.dmg)",
+          otherKey: "macos",
+        },
+      };
+
+      function detectVisitorOS() {
+        const ua = (navigator.userAgent || "").toLowerCase();
+        const plat = (
+          (navigator.userAgentData && navigator.userAgentData.platform) ||
+          navigator.platform ||
+          ""
+        ).toLowerCase();
+        if (
+          plat.includes("mac") ||
+          ua.includes("macintosh") ||
+          ua.includes("mac os") ||
+          ua.includes("iphone") ||
+          ua.includes("ipad")
+        ) {
+          return "macos";
+        }
+        return "windows";
+      }
+
+      let currentOS = detectVisitorOS();
+      let latestManifest = null;
+
+      function renderOS(osKey) {
+        currentOS = osKey;
+        const cfg = PLATFORMS[osKey];
+        const ver = latestManifest
+          ? (latestManifest.version || "0.1.0").replace(/^v/i, "")
+          : "";
+
+        const url =
+          osKey === "macos"
+            ? (latestManifest && latestManifest.macos_url) || cfg.defaultUrl
+            : (latestManifest &&
+                (latestManifest.windows_url || latestManifest.download_url)) ||
+              cfg.defaultUrl;
+
+        document.getElementById("download-link").href = url;
+        document.getElementById("button-label").textContent = ver
+          ? `Download for ${cfg.label} (${ver})`
+          : `Download for ${cfg.label} (${cfg.ext})`;
+        document.getElementById("os-note").textContent = cfg.osNote;
+        document.getElementById("meta-installer").textContent = cfg.file;
+        document.getElementById("meta-arch").textContent = cfg.arch;
+        document.getElementById("other-os-prompt").textContent =
+          cfg.otherPrompt;
+        document.getElementById("switch-os-btn").textContent = cfg.otherAction;
+
+        document
+          .getElementById("tab-macos")
+          .setAttribute("aria-selected", String(osKey === "macos"));
+        document
+          .getElementById("tab-windows")
+          .setAttribute("aria-selected", String(osKey === "windows"));
+        document.getElementById("macos-guide").style.display =
+          osKey === "macos" ? "block" : "none";
+      }
+
+      document.getElementById("switch-os-btn").addEventListener("click", () => {
+        renderOS(PLATFORMS[currentOS].otherKey);
+      });
+      document
+        .getElementById("tab-macos")
+        .addEventListener("click", () => renderOS("macos"));
+      document
+        .getElementById("tab-windows")
+        .addEventListener("click", () => renderOS("windows"));
+
+      // Render immediately using detected OS before fetch completes
+      renderOS(currentOS);
+
+      async function loadLatestRelease() {
+        try {
+          const res = await fetch(`./latest.json?t=${Date.now()}`, {
+            cache: "no-store",
+          });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          latestManifest = await res.json();
+          const ver = (latestManifest.version || "0.1.0").replace(/^v/i, "");
+          document.getElementById("top-version").textContent = `Build ${ver}`;
+          document.getElementById("meta-version").textContent = ver;
+          if (latestManifest.published_at) {
+            const dt = new Date(latestManifest.published_at);
+            document.getElementById("meta-date").textContent = isNaN(dt)
+              ? latestManifest.published_at
+              : dt.toLocaleDateString(undefined, {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                });
+          }
+          renderOS(currentOS);
+        } catch {
+          document.getElementById("meta-version").textContent = "Latest";
+        }
+      }
+      loadLatestRelease();
+    </script>
+  </body>
+</html>

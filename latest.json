@@ -1,0 +1,13 @@
+{
+  "version": "0.2.5",
+  "windows_version": "0.2.5",
+  "macos_version": "0.2.5",
+  "windows_url": "https://chatelle-downloads.vercel.app/Chatelle-setup.exe",
+  "macos_url": "https://chatelle-downloads.vercel.app/Chatelle.dmg",
+  "download_url": "https://chatelle-downloads.vercel.app/Chatelle-setup.exe",
+  "page_url": "https://chatelle-downloads.vercel.app/",
+  "windows_sha256": "474aa47595b854924c0efc3d40ab9a3d2ac1a0c426349a8dc572741292b668e1",
+  "macos_sha256": "6439788c90d3b6ff6368357fe888e8187bc539c746f1267d8c6a8ba5a2c29953",
+  "published_at": "2026-11-26T16:37:03Z",
+  "notes": "Merge pull request #10: Live Microphone key checks and private recordings; admin last online"
+}
