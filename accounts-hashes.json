@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-28T07:23:03.619Z",
+  "updated_at": "2026-11-28T07:23:08.511Z",
   "accounts": [
     {
       "key_hash": "9c57b6437bdbbbf61dcfcf64103b88d36503ec96ddfd971030400f2405b1ef26",
@@ -19,7 +19,7 @@
       "key_hash": "7f1a9c69cd4cf20f85034e6d41203b2dc14b189922286cbef432ada72f2588b6",
       "masked_key": "CHTL-****-GNHE",
       "name": "Parity test",
-      "status": "active",
+      "status": "disabled",
       "created_at": "2026-11-28T07:23:02.522Z"
     }
   ]
